@@ -26,15 +26,15 @@ public class GeoObject {
         this.mGeoImageName = mGeoImageName;
     }
 
-    public static final String[] GEO_LOCATION_EUROPE = {
-            "YES",
-            "NO",
-            "NO",
-            "YES",
-            "NO",
-            "YES",
-            "YES",
-            "NO"
+    public static final String[] GEO_LOCATION_NAME = {
+            "Denmark",
+            "Canada",
+            "Bangladesh",
+            "Kazachstan",
+            "Colombia",
+            "Poland",
+            "Malta",
+            "Thailand"
     };
 
     public static final int[] GEO_IMAGE_IDS = {
