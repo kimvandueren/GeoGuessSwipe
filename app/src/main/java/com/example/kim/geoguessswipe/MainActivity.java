@@ -1,5 +1,6 @@
 package com.example.kim.geoguessswipe;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,17 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
         final List<GeoObject> mGeoObjects = new ArrayList<>();
         for (int i = 0; i < GeoObject.GEO_LOCATION_NAME.length; i++) {
-            mGeoObjects.add(new GeoObject(GeoObject.GEO_LOCATION_NAME[i],
-                    GeoObject.GEO_IMAGE_IDS[i]));
+            mGeoObjects.add(new GeoObject(
+                    GeoObject.GEO_LOCATION_NAME[i],
+                    GeoObject.GEO_IMAGE_IDS[i],
+                    GeoObject.IMAGE_IN_EUROPE[i]));
         }
 
-        for (int i = 0; i < mGeoObjects.size(); i++) {
-            GeoObject test = mGeoObjects.get(i);
-            System.out.println(test.getmGeoName());
-            System.out.println(test.getmGeoImageName());
-        }
-
-        RecyclerView mGeoRecyclerView = findViewById(R.id.recyclerView);
+        final RecyclerView mGeoRecyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
 
         mGeoRecyclerView.setLayoutManager(mLayoutManager);
@@ -46,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                         int position = (viewHolder.getAdapterPosition());
+                        String snackbarMessage = " ";
+
+                        if (swipeDir == ItemTouchHelper.LEFT){
+                            if (mGeoObjects.get(position).getmImageInEurope() == true){
+                                snackbarMessage = "Correct!";
+                            } else {
+                                snackbarMessage = "Wrong!";
+                            }
+                        } else {
+                            if (mGeoObjects.get(position).getmImageInEurope() == false){
+                                snackbarMessage = "Correct!";
+                            } else {
+                                snackbarMessage = "Wrong!";
+                            }
+                        }
+
+                        Snackbar snackbar = Snackbar.make(mGeoRecyclerView, snackbarMessage, Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+
                         mGeoObjects.remove(position);
                         mAdapter.notifyItemRemoved(position);
                     }
@@ -54,5 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mGeoRecyclerView);
+
+
     }
 }

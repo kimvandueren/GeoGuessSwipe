@@ -4,10 +4,12 @@ package com.example.kim.geoguessswipe;
 public class GeoObject {
     private String mGeoName;
     private int mGeoImageName;
+    private boolean mImageInEurope;
 
-    public GeoObject(String mGeoName, int mGeoImageName) {
+    public GeoObject(String mGeoName, int mGeoImageName, boolean mImageInEurope) {
         this.mGeoName = mGeoName;
         this.mGeoImageName = mGeoImageName;
+        this.mImageInEurope = mImageInEurope;
     }
 
     public String getmGeoName() {
@@ -24,6 +26,10 @@ public class GeoObject {
 
     public void setmGeoImageName(int mGeoImageName) {
         this.mGeoImageName = mGeoImageName;
+    }
+
+    public boolean getmImageInEurope() {
+        return mImageInEurope;
     }
 
     public static final String[] GEO_LOCATION_NAME = {
@@ -46,5 +52,16 @@ public class GeoObject {
             R.drawable.img6_yes_poland,
             R.drawable.img7_yes_malta,
             R.drawable.img8_no_thailand
+    };
+
+    public static final boolean[] IMAGE_IN_EUROPE = {
+            true,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            false
     };
 }
